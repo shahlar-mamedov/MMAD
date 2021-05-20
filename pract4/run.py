@@ -1,12 +1,6 @@
 import numpy as np
 from kNN import k_nearest
 
-# X - обучающее множество
-# TODO: заполнить X данными из исследований профессора Икота.
-# первый столбец - рост, второй - вес, третий - класс
-# число строк соответствует числу особей
-# X = np.array(...)
-
 X = np.array([[33, 21, 1],
 			  [41, 13, 1],
 			  [18, 22, 1],
@@ -24,21 +18,19 @@ X = np.array([[33, 21, 1],
 			  [135, 47, 4],
 			  [138, 66, 4]])
 
-# ввод роста и веса особи, которую нужно классифицировать
-# TODO: пользуясь функцией input, попросить пользователя ввести рост и вес особи
-# Для справки использовать команду help input
-# Для преобразования строки к целому числу использовать функцию int()
-# height = ...
-# weight = ...
 height = int(input("Введите рост особи: "))
 weight = int(input("Введите вес особи: "))
 
 obj = np.array([height, weight])
 
-# классификация методом k ближайших соседей
 k = 3
-object_class = k_nearest(X, k, obj)
+object_class = k_nearest(X, k, obj, 1)
 
-# вывод результата классификации
 monkeys = {1: 'lemur', 2: 'schimpanze', 3: 'gorilla', 4: 'orangutan'}
-print(monkeys[object_class])
+print("Через евклидово расстояние:", monkeys[object_class])
+
+object_class = k_nearest(X, k, obj, 2)
+print("Через расстояние городских кварталов:", monkeys[object_class])
+
+object_class = k_nearest(X, k, obj, 3)
+print("Через расстояние Минковского:", monkeys[object_class])
